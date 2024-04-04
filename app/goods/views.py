@@ -1,11 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 
 from goods.models import Products
 
 
-def catalog(request):
+def catalog(request, category_slug):
 
-    goods = Products.objects.all()
+    # Сортировка категории
+    if category_slug == 'all':
+        goods = Products.objects.all()
+    else:
+        # Вызов Page not found, если в БД ничего нет
+        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
 
     context = {
         'title': 'Home - Каталог',
