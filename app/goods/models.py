@@ -9,6 +9,8 @@ class Categories(models.Model):
         db_table = 'category'
         verbose_name = 'Карегорию'
         verbose_name_plural = 'Категории'
+        # Установка значения по умолчанию для пагрнатора (сотрировка по умолчанию - сортировка по id)
+        ordering = ("id",)
 
     def __str__(self):
         return self.name
