@@ -4,7 +4,9 @@ from django.shortcuts import render, get_list_or_404
 from goods.models import Products
 
 
-def catalog(request, category_slug, page=1):
+def catalog(request, category_slug):
+
+    page = request.GET.get('page', 1)
 
     # Реализация сортировки по категории
     if category_slug == 'all':
@@ -15,7 +17,7 @@ def catalog(request, category_slug, page=1):
 
     # Создание пагинатора (по 3 товара на страницу)
     paginator = Paginator(goods, 3)
-    current_page = paginator.page(page)  # Переменная для пользователся
+    current_page = paginator.page(int(page))  # Переменная для пользователся
 
     context = {
         'title': 'Home - Каталог',
