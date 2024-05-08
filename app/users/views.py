@@ -77,6 +77,10 @@ def profile(request):
     return render(request, 'users/profile.html', contex)
 
 
+def users_cart(request):
+    return render(request, 'users/users-cart.html')
+
+
 def logout(request):
     name = request.user.username
     if name:
