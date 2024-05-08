@@ -19,6 +19,10 @@ def login(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, f"{username}, Вы успешно вошли в аккаунт")
+
+                if request.POST.get('next', None):
+                    return HttpResponseRedirect(request.POST.get('next'))
+
                 # Перенаправление на главную страницу
                 return HttpResponseRedirect(reverse('main:index'))
     else:
@@ -40,6 +44,7 @@ def registration(request):
             user = form.instance
             auth.login(request, user)
             messages.success(request, f"{user.username}, Вы успешно зарегестрировались и вошли в аккаунт")
+
             # Перенаправление на страницу входа
             return HttpResponseRedirect(reverse('main:index'))
     else:
@@ -59,6 +64,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Данные успешно обновлены")
+
             # Перенаправление на страницу пользователя
             return HttpResponseRedirect(reverse('user:profile'))
     else:
@@ -70,8 +76,12 @@ def profile(request):
     }
     return render(request, 'users/profile.html', contex)
 
-# @login_required
+
 def logout(request):
-    messages.success(request, f"{request.user.username}, Вы успешно вышли из аккаунта")
-    auth.logout(request)
-    return redirect(reverse('main:index'))
+    name = request.user.username
+    if name:
+        messages.success(request, f"{name}, Вы успешно вышли из аккаунта")
+        auth.logout(request)
+        return HttpResponseRedirect(reverse('main:index'))
+    else:
+        return redirect(reverse('main:index'))
