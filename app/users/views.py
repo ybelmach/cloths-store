@@ -7,8 +7,8 @@ from django.shortcuts import redirect
 from users.forms import UserLoginForm, UserRegistrationForm, ProfileForm
 from django.urls import reverse
 
-def login(request):
 
+def login(request):
     # Создание формы, авторизация
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -20,7 +20,8 @@ def login(request):
                 auth.login(request, user)
                 messages.success(request, f"{username}, Вы успешно вошли в аккаунт")
 
-                if request.POST.get('next', None):
+                redirect_page = request.GET.get('next', None)
+                if redirect_page and redirect_page != reverse('user:logout'):
                     return HttpResponseRedirect(request.POST.get('next'))
 
                 # Перенаправление на главную страницу
@@ -56,6 +57,7 @@ def registration(request):
     }
     return render(request, 'users/registration.html', contex)
 
+
 @login_required
 def profile(request):
     # Создание формы, регистрация
@@ -81,11 +83,9 @@ def users_cart(request):
     return render(request, 'users/users-cart.html')
 
 
+@login_required
 def logout(request):
     name = request.user.username
-    if name:
-        messages.success(request, f"{name}, Вы успешно вышли из аккаунта")
-        auth.logout(request)
-        return HttpResponseRedirect(reverse('main:index'))
-    else:
-        return redirect(reverse('main:index'))
+    messages.success(request, f"{name}, Вы успешно вышли из аккаунта")
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('main:index'))
