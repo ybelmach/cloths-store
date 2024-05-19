@@ -5,7 +5,6 @@ $(document).ready(function () {
 
     // Ловим собыитие клика по кнопке добавить в корзину
     $(document).on("click", ".add-to-cart", function (e) {
-
         // Блокируем его базовое действие
         e.preventDefault();
 
@@ -19,11 +18,10 @@ $(document).ready(function () {
         // Из атрибута href берем ссылку на контроллер django
         var add_to_cart_url = $(this).attr("href");
 
-
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
+            type: "POST",
             url: add_to_cart_url,
-            method: "post",
             data: {
                 product_id: product_id,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
@@ -52,6 +50,8 @@ $(document).ready(function () {
             },
         });
     });
+
+
 
 
     // Ловим собыитие клика по кнопке удалить товар из корзины
@@ -101,6 +101,8 @@ $(document).ready(function () {
             },
         });
     });
+
+
 
 
     // Теперь + - количества товара

@@ -59,6 +59,7 @@ def cart_change(request):
 
         cart.quantity = quantity
         cart.save()
+        updated_quantity = cart.quantity
 
         cart = get_user_carts(request)
         cart_items_html = render_to_string(
@@ -67,7 +68,7 @@ def cart_change(request):
         response_data = {
             "message": "Количество изменено",
             "cart_items_html": cart_items_html,
-            "quantity": cart.quantity,
+            "quaantity": updated_quantity,
         }
 
         return JsonResponse(response_data)
