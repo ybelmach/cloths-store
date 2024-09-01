@@ -27,7 +27,7 @@ class CreateOrderForm(forms.Form):
         pattern = re.compile(r"^1[3456789]\d{9}$")
         phone_number = re.findall(r'(\d+)', data)
         phone_number = '+' + "".join(phone_number)
-        if not re.match(r'\+?375(?:2[95]|33|44)\d{7}', phone_number):
+        if not re.match(r'^\+?375(?:2[95]|33|44)\d{7}\b', phone_number):
             raise forms.ValidationError("Неверный формат номера")
 
         return data

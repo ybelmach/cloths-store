@@ -1,1 +1,58 @@
-[{"model": "goods.categories", "pk": 4, "fields": {"name": "Все товары", "slug": "all"}}, {"model": "goods.categories", "pk": 5, "fields": {"name": "Кухня", "slug": "kuhnya"}}, {"model": "goods.categories", "pk": 6, "fields": {"name": "Спальня", "slug": "spalnya"}}, {"model": "goods.categories", "pk": 7, "fields": {"name": "Гостинная", "slug": "gostinnaya"}}, {"model": "goods.categories", "pk": 8, "fields": {"name": "Офис", "slug": "ofis"}}, {"model": "goods.categories", "pk": 9, "fields": {"name": "Фурнитура", "slug": "furnitura"}}, {"model": "goods.categories", "pk": 10, "fields": {"name": "Декор", "slug": "dekor"}}]
+[
+  {
+    "model": "goods.categories",
+    "pk": 1,
+    "fields": {
+      "name": "Все товары",
+      "slug": "all"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 2,
+    "fields": {
+      "name": "Платья",
+      "slug": "platya"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 3,
+    "fields": {
+      "name": "Брюки",
+      "slug": "bryuki"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 4,
+    "fields": {
+      "name": "Джинсы",
+      "slug": "dzhinsy"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 5,
+    "fields": {
+      "name": "Футболки",
+      "slug": "futbolki"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 6,
+    "fields": {
+      "name": "Шорты",
+      "slug": "shorty"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 7,
+    "fields": {
+      "name": "Аксессуары",
+      "slug": "aksessuary"
+    }
+  }
+]

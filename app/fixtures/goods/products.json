@@ -1,1 +1,324 @@
-[{"model": "goods.products", "pk": 1, "fields": {"name": "Чайный столик и три стула", "slug": "chajnyj-stolik-i-tri-stula", "description": "Комплект из трёх стульев и дизайнерский столик для гостинной комнаты.", "image": "goods_images/set_of_tea_table_and_three_chairs.jpg", "price": "150.00", "discount": "0.00", "quantity": 10, "category": 5}}, {"model": "goods.products", "pk": 2, "fields": {"name": "Чайный столик и два стула", "slug": "chajnyj-stolik-i-dva-stula", "description": "Набор из стола и двух стульев в минималистическом стиле.", "image": "goods_images/set_of_tea_table_and_two_chairs.jpg", "price": "93.00", "discount": "3.00", "quantity": 20, "category": 7}}, {"model": "goods.products", "pk": 3, "fields": {"name": "Двухспальная кровать", "slug": "dvuhspalnaya-krovat", "description": "Кровать двухспальная с надголовником и вообще очень ортопедичная.", "image": "", "price": "670.00", "discount": "10.00", "quantity": 8, "category": 6}}, {"model": "goods.products", "pk": 4, "fields": {"name": "Прикроватный столик", "slug": "prikrovatnyj-stolik", "description": "Прикроватный столик с двумя выдвижными ящиками (цветок не входит в комплект).", "image": "goods_images/bedside_table.jpg", "price": "55.00", "discount": "33.33", "quantity": 15, "category": 6}}]
+[
+  {
+    "model": "goods.products",
+    "pk": 1,
+    "fields": {
+      "name": "Платье женское, SAVAGE",
+      "slug": "plate-zhenskoe-savage",
+      "description": "Платье-сарафан с акцентом на плечах и сборкой на спинке, капсула Navy Night. Материал изделия: лён, вискоза. Вырез лодочка. Объемный силуэт. Боковые карманы в швах. Страна производства: Китай. Продавец ОДО «Белсаваж» Индекс 223053, Минская область, Минский район, пересечение Логойского тракта и МКАД, здание главный выставочный павильон ТРЦ «Экспобел», дом 74, офис 203 (второй этаж). платье женское арт. 44580/6",
+      "image": "goods_images/1d895a7432fcd99de708b115f180fe9f_460_612.jpg",
+      "price": "75.30",
+      "discount": "0.00",
+      "quantity": 24,
+      "category": 2
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 2,
+    "fields": {
+      "name": "Платье миди с вырезом бандо и анималистическим принтом",
+      "slug": "plate-midi-s-vyrezom-bando-i-animalisticheskim-printom",
+      "description": "Внесите яркость и дерзость в свой гардероб с нашим платьем миди с вырезом бандо и анималистическим принтом. Этот эффектный наряд создан для тех, кто не боится выделяться и стремится к элегантности в каждой детали.",
+      "image": "goods_images/d84e93d40e766977bde6923be7f9bf9f-0624173060_2_24_0.jpg",
+      "price": "28.12",
+      "discount": "0.00",
+      "quantity": 7,
+      "category": 2
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 3,
+    "fields": {
+      "name": "Мини-платье в стиле рустик с оборками",
+      "slug": "mini-plate-v-stile-rustik-s-oborkami",
+      "description": "Погрузитесь в очарование деревенской романтики с нашим мини-платьем в стиле рустик с оборками. Это нежное и женственное платье станет идеальным выбором для теплых летних дней, пикников и прогулок на природе.",
+      "image": "goods_images/1043494251_1_1_3.jpg",
+      "price": "40.00",
+      "discount": "10.00",
+      "quantity": 38,
+      "category": 2
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 4,
+    "fields": {
+      "name": "Брюки прямого кроя из смесового льна с эластичным поясом",
+      "slug": "bryuki-pryamogo-kroya-iz-smesovogo-lna-s-elastichnym-poyasom",
+      "description": "Добавьте элегантности и комфорта в ваш гардероб с нашими брюками прямого кроя из смесового льна с эластичным поясом. Эти стильные и практичные брюки станут идеальным выбором для повседневного ношения и особых случаев.",
+      "image": "goods_images/7c5b56339045fd9ed0374cbcd9670ebc-0134741800_2_24_0.jpg",
+      "price": "50.00",
+      "discount": "0.00",
+      "quantity": 16,
+      "category": 3
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 5,
+    "fields": {
+      "name": "Брюки с широкими штанинами и защипами",
+      "slug": "bryuki-s-shirokimi-shtaninami-i-zashipami",
+      "description": "Откройте для себя непревзойденное сочетание стиля и комфорта с нашими брюками с широкими штанинами и защипами. Эти модные брюки станут отличным дополнением вашего гардероба, добавляя элегантности и утонченности в любой образ.",
+      "image": "goods_images/0d5558780c1b50ca88ba5e70cd6b8636-0180168830_2_24_0.jpg",
+      "price": "75.00",
+      "discount": "0.00",
+      "quantity": 13,
+      "category": 3
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 6,
+    "fields": {
+      "name": "Брюки из рельефной ткани с широкими штанинами",
+      "slug": "bryuki-iz-relefnoj-tkani-s-shirokimi-shtaninami",
+      "description": "Погрузитесь в мир элегантности и комфорта с нашими брюками из рельефной ткани с широкими штанинами. Эти стильные брюки идеально подойдут для создания как повседневных, так и вечерних образов, добавляя изысканность и уникальность вашему гардеробу.",
+      "image": "goods_images/365fa8ec227c73ccaa451a2e6aee0f8e-0130741406_2_24_0.jpg",
+      "price": "37.20",
+      "discount": "5.00",
+      "quantity": 8,
+      "category": 3
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 7,
+    "fields": {
+      "name": "Джинсы с заниженным шаговым швом с низкой посадкой",
+      "slug": "dzhinsy-s-zanizhennym-shagovym-shvom-s-nizkoj-posadkoj",
+      "description": "Добавьте стильную нотку небрежности в ваш гардероб с нашими джинсами с заниженным шаговым швом и низкой посадкой. Эти джинсы сочетают в себе современный дизайн и комфорт, создавая идеальный образ для повседневной носки.",
+      "image": "goods_images/bd55ff80b3d415f6ae32d6a301844cde-0032179428_2_24_0.jpg",
+      "price": "69.99",
+      "discount": "0.00",
+      "quantity": 22,
+      "category": 4
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 8,
+    "fields": {
+      "name": "Джинсы карго с карманами",
+      "slug": "dzhinsy-kargo-s-karmanami",
+      "description": "Привнесите практичность и стиль в ваш повседневный образ с нашими джинсами карго с карманами. Эти джинсы сочетают современный дизайн с функциональностью, делая их идеальным выбором для активного и динамичного образа жизни.",
+      "image": "goods_images/f0d09eab789efd47b146022d7530c8f9-0011534426_2_24_0.jpg",
+      "price": "120.00",
+      "discount": "50.00",
+      "quantity": 30,
+      "category": 4
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 9,
+    "fields": {
+      "name": "Джинсы скинни с очень высокой посадкой",
+      "slug": "dzhinsy-skinni-s-ochen-vysokoj-posadkoj",
+      "description": "Добавьте элегантности и современного стиля в ваш гардероб с нашими джинсами скинни с очень высокой посадкой. Эти джинсы идеально подходят для создания утонченного и женственного образа, сочетая комфорт и модные тенденции.",
+      "image": "goods_images/cfb4f7389779804cd69c52275675b795-5010156433_2_24_0.jpg",
+      "price": "30.00",
+      "discount": "5.00",
+      "quantity": 20,
+      "category": 4
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 10,
+    "fields": {
+      "name": "Полосатая футболка поло из сетчатой ткани с принтом",
+      "slug": "polosataya-futbolka-polo-iz-setchatoj-tkani-s-printom",
+      "description": "Откройте для себя идеальное сочетание комфорта и стиля с нашей полосатой футболкой поло из сетчатой ткани с принтом. Эта уникальная футболка станет отличным выбором для создания модного и непринужденного образа, подходящего для любого повседневного случая.",
+      "image": "goods_images/a50f784f9eace71fd4b10739da02192e-3013492902_1_1_0.jpg",
+      "price": "20.00",
+      "discount": "0.00",
+      "quantity": 17,
+      "category": 5
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 11,
+    "fields": {
+      "name": "Футболка с принтом",
+      "slug": "futbolka-s-printom",
+      "description": "Обновите свой гардероб с нашей стильной футболкой с принтом, которая сочетает в себе комфорт и модный дизайн. Эта футболка станет идеальным дополнением к любому повседневному образу, добавляя яркий акцент и индивидуальность.",
+      "image": "goods_images/155970b07a01410936a82367ba3ff3e4-7557360251_1_1_0.jpg",
+      "price": "30.00",
+      "discount": "0.00",
+      "quantity": 15,
+      "category": 5
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 12,
+    "fields": {
+      "name": "Шорты со стразами и вышивкой New York Red Bulls",
+      "slug": "shorty-so-strazami-i-vyshivkoj-new-york-red-bulls",
+      "description": "Привнесите яркость и стиль в ваш спортивный гардероб с нашими шортами со стразами и вышивкой New York Red Bulls. Эти шорты идеально подойдут для фанатов, которые хотят поддерживать свою любимую команду с элегантностью и комфортом.",
+      "image": "goods_images/3202179800_2_24_3.jpg",
+      "price": "88.88",
+      "discount": "3.00",
+      "quantity": 123,
+      "category": 6
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 13,
+    "fields": {
+      "name": "Джинсовые шорты с люверсами",
+      "slug": "dzhinsovye-shorty-s-lyuversami",
+      "description": "Добавьте нотку дерзости и стиля в ваш летний гардероб с нашими джинсовыми шортами с люверсами. Эти шорты сочетают в себе классический деним и современные акценты, создавая идеальный образ для теплых дней.",
+      "image": "goods_images/cb2116fd71e29f6b2398eb9a4ed268b9-3200179428_1_1_0.jpg",
+      "price": "20.00",
+      "discount": "0.00",
+      "quantity": 17,
+      "category": 6
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 14,
+    "fields": {
+      "name": "Полосатая футболка поло из сетчатой ткани с принтом (муж.)",
+      "slug": "polosataya-futbolka-polo-iz-setchatoj-tkani-s-printom-myz",
+      "description": "Освежите свой стиль с нашей полосатой футболкой поло из сетчатой ткани с принтом. Эта уникальная футболка сочетает в себе классический дизайн поло с современными элементами, создавая стильный и комфортный образ для любого повседневного момента.",
+      "image": "goods_images/c2a409cee4440525c923bb05284c0ea0-3013492902_2_3_0.jpg",
+      "price": "50.00",
+      "discount": "90.00",
+      "quantity": 121,
+      "category": 5
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 15,
+    "fields": {
+      "name": "Клетчатая футболка поло с принтом Inter Miami CF",
+      "slug": "kletchataya-futbolka-polo-s-printom-inter-miami-cf",
+      "description": "Поддержите свою любимую футбольную команду с нашей клетчатой футболкой поло с принтом Inter Miami CF. Эта стильная футболка сочетает в себе классический дизайн поло с уникальным принтом, позволяя вам выразить свою преданность команде с элегантностью и стилем.",
+      "image": "goods_images/e5835bc5189ae5757f58839b0928ec9e-2839623800_2_3_0.jpg",
+      "price": "50.00",
+      "discount": "0.00",
+      "quantity": 19,
+      "category": 5
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 16,
+    "fields": {
+      "name": "Футболка из сетчатой ткани с принтом New York Red Bulls",
+      "slug": "futbolka-iz-setchatoj-tkani-s-printom-new-york-red-bulls",
+      "description": "Ощутите страсть и энергию игры с нашей футболкой из сетчатой ткани с принтом New York Red Bulls. Эта уникальная футболка сочетает в себе стильный дизайн и удобство сетчатой ткани, чтобы подчеркнуть вашу поддержку любимой команды с ярким и неповторимым образом.",
+      "image": "goods_images/b2c5ba973a9d08430f5d0caabc1f24a6-7987492615_2_3_0.jpg",
+      "price": "45.00",
+      "discount": "10.00",
+      "quantity": 27,
+      "category": 5
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 17,
+    "fields": {
+      "name": "Шорты из сетчатой ткани с принтом Inter Miami CF",
+      "slug": "shorty-iz-setchatoj-tkani-s-printom-inter-miami-cf",
+      "description": "Исследуйте удобство и стиль с нашими шортами из сетчатой ткани с принтом Inter Miami CF. Эти шорты сочетают в себе высокую производительность и модный дизайн, позволяя вам выразить свою поддержку любимой команде с комфортом и уверенностью.",
+      "image": "goods_images/a7e64f2fb5b59e8f11f28b77a45f52d7-3392296800_2_24_0.jpg",
+      "price": "45.00",
+      "discount": "0.00",
+      "quantity": 12,
+      "category": 6
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 18,
+    "fields": {
+      "name": "Шорты приталенного кроя с принтом Inter Miami CF",
+      "slug": "shorty-pritalennogo-kroya-s-printom-inter-miami-cf",
+      "description": "Демонстрируйте свою страсть к футболу с нашими шортами приталенного кроя с принтом Inter Miami CF. Эти стильные и функциональные шорты позволят вам выделиться из толпы и поддержать свою любимую команду с комфортом и уверенностью.",
+      "image": "goods_images/2d237d736a184880670dc1a0d951a0c9-3359557802_2_24_0.jpg",
+      "price": "25.50",
+      "discount": "0.00",
+      "quantity": 26,
+      "category": 6
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 19,
+    "fields": {
+      "name": "Брюки приталенного кроя с лампасами и принтом LA Galaxy",
+      "slug": "bryuki-pritalennogo-kroya-s-lampasami-i-printom-la-galaxy",
+      "description": "Освежите свой спортивный стиль с нашими брюками приталенного кроя с лампасами и принтом LA Galaxy. Эти ультрамодные брюки сочетают в себе современный дизайн и стильные акценты, позволяя вам выделиться из толпы и поддержать свою любимую команду с элегантностью и уверенностью.",
+      "image": "goods_images/1fb97443b403eaf07cad29d948eb1630-0494054700_2_3_0_v6BedRk.jpg",
+      "price": "50.00",
+      "discount": "20.00",
+      "quantity": 17,
+      "category": 3
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 20,
+    "fields": {
+      "name": "Классические брюки с узором «гусиная лапка»",
+      "slug": "klassicheskie-bryuki-s-uzorom-gusinaya-lapka",
+      "description": "Погрузитесь в элегантность и стиль с нашими классическими брюками с узором «гусиная лапка». Эти брюки прекрасно сочетают в себе традиционный дизайн и уникальный узор, создавая образ изысканности и изящества.",
+      "image": "goods_images/1fb97443b403eaf07cad29d948eb1630-0494054700_2_3_0.jpg",
+      "price": "27.00",
+      "discount": "8.00",
+      "quantity": 18,
+      "category": 3
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 21,
+    "fields": {
+      "name": "Кепка с вышивкой LA Galaxy",
+      "slug": "kepka-s-vyshivkoj-la-galaxy",
+      "description": "Проявите свою страсть к футболу с нашей кепкой с вышивкой LA Galaxy. Эта стильная и функциональная кепка позволит вам выразить вашу преданность любимой команде с комфортом и стилем.",
+      "image": "goods_images/6d111fefd71cbc52354e6f2a1e34bf4f-4703423250_1_1_0.jpg",
+      "price": "13.00",
+      "discount": "0.00",
+      "quantity": 20,
+      "category": 7
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 22,
+    "fields": {
+      "name": "Сумка из искусственной кожи с принтом Inter Miami CF",
+      "slug": "sumka-iz-iskusstvennoj-kozhi-s-printom-inter-miami-cf",
+      "description": "Покажите свою преданность любимой команде с нашей стильной сумкой из искусственной кожи с принтом Inter Miami CF. Эта сумка сочетает в себе модный дизайн и функциональность, идеально подходя для повседневного использования и поддерживая ваш неповторимый стиль.",
+      "image": "goods_images/0fb4eb0fd00d7fa21d5ebeade7e5af8f-4957162800_2_4_0.jpg",
+      "price": "35.00",
+      "discount": "43.00",
+      "quantity": 39,
+      "category": 7
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 23,
+    "fields": {
+      "name": "Набор носков с принтом Inter Miami CF",
+      "slug": "nabor-noskov-s-printom-inter-miami-cf",
+      "description": "Добавьте яркости и футбольного стиля в свой гардероб с нашим набором носков с принтом Inter Miami CF. Эти носки сочетают в себе комфорт и оригинальный дизайн, позволяя вам выразить свою поддержку любимой команде в любой день.",
+      "image": "goods_images/4c5e37af6d945e663bebb9c41ce6f67b-4888056620_1_1_0.jpg",
+      "price": "9.00",
+      "discount": "0.00",
+      "quantity": 50,
+      "category": 7
+    }
+  }
+]

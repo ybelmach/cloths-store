@@ -4,12 +4,11 @@ from goods.models import Categories
 
 
 def index(request):
-
     categories = Categories.objects.all()
 
     contex = {
         'title': 'Home - Главная',
-        'content': 'Магазин мебели HOME',
+        'content': 'Магазин одежды HOME',
         'categories': categories,
     }
     return render(request, 'main/index.html', contex)
@@ -18,7 +17,17 @@ def index(request):
 def about(request):
     context = {
         'title': 'Home - О нас',
-        'content': 'О нас',
-        'text_on_page': 'Текст',
+        'name': 'Fashion House',
+        'email': 'yaroslav.belmach.ln@gmail.com'
     }
     return render(request, 'main/about.html', context)
+
+
+def delivery(request):
+    context = {
+        'title': 'Home - Доставка',
+        'name': 'Fashion House',
+        'email': 'yaroslav.belmach.ln@gmail.com',
+        'adress': 'улица Семашко, 35А, Минск',
+    }
+    return render(request, 'main/delivery.html', context)
