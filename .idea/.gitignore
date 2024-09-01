@@ -6,11 +6,3 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-
-venv/
-templates-for-Django-4-course-Home-main/
-.pylintrc
-__pycache__/
-.idea/
-db.sqlite3
-media/
