@@ -10,4 +10,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('users-cart/', views.users_cart, name='users_cart'),
     path('logout/', views.logout, name='logout'),
+    path('forgot-pass/', views.forgot_password, name='forgot-pass'),
+    path('two-fa/', views.two_fa, name='two_fa'),
+    path('confirmation/', views.confirmation, name='confirmation'),
 ]

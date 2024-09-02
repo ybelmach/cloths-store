@@ -70,6 +70,17 @@
                         </div>
                         <button type="submit" class="btn btn-dark">Сохранить</button>
                     </form>
+                    <p></p>
+                    {% if two_factor_required %}
+                        <div class="col-md-12 mb-3">
+                            <label for="id_two_factor" class="form-label">Two-factor authentication (2FA)</label>
+                            <p>
+                                <a href="{% url 'users:two_fa' %}" class="btn btn-dark">Подключить</a>
+                            </p>
+                        </div>
+                    {% else %}
+                        <label for="id_two_factor" class="form-label">Two-factor authentication (2FA) ✓</label>
+                    {% endif %}
                 </div>
             </div>
             <!-- Корзина -->

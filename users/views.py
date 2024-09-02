@@ -4,11 +4,14 @@ from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.core.mail import send_mail
+from uuid import uuid4
 
 from carts.models import Cart
 from orders.models import Order, OrderItem
 from users.forms import UserLoginForm, UserRegistrationForm, ProfileForm
 from django.urls import reverse
+import my_info
 
 
 def login(request):
@@ -74,6 +77,52 @@ def registration(request):
     return render(request, 'users/registration.html', contex)
 
 
+def two_fa(request):
+    return render(request, 'users/two-fa.html')
+
+
+def confirmation(request):
+    if request.method == 'POST':
+        if request.POST:
+            email = request.POST['email']
+            code = str(uuid4())
+            code = code[:code.find('-')]
+            send_mail(
+                subject='Your code verification from online shop.',
+                message=f"""Hello Blink Customer
+    Please enter this verification code in site now to confirm your email address and complete the setup process:
+    Your verification PIN:
+    <h1>{code}</h1>
+    This code expires 40 minutes from when it was sent. If the code is not entered, access to your account from the device will not be granted.
+    If you'd like more information or assistance please view our FAQ or contact Customer Service.
+    Thanks,
+    The Blink Team""",
+                from_email=my_info.EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            print(f"[INFO] message to email was sent to {email}")
+
+
+            return render(request, 'users/confirmation.html')
+        else:
+            return render(request, 'users/profile.html')
+    else:
+        print('1111111111111')
+        return HttpResponseRedirect(reverse('users:profile'))
+
+
+
+
+
+
+
+
+
+def forgot_password(request):
+    return render(request, 'users/forgot_pass.html')
+
+
 @login_required
 def profile(request):
     # Создание формы, регистрация
@@ -101,6 +150,7 @@ def profile(request):
         'title': 'Home - Кабинет',
         'form': form,
         'orders': orders,
+        'two_factor_required': True,
     }
     return render(request, 'users/profile.html', contex)
 
