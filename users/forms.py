@@ -46,3 +46,13 @@ class ProfileForm(UserChangeForm):
             "username",
             "email",
         )
+
+
+class CodeForm(forms.Form):
+    code = forms.UUIDField()
+
+    class Meta:
+        model = User
+        fields = (
+            'code'
+        )

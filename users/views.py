@@ -6,11 +6,15 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from uuid import uuid4
+from datetime import datetime
+import pyotp
 
 from carts.models import Cart
 from orders.models import Order, OrderItem
+from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, ProfileForm
 from django.urls import reverse
+from users.utils import two_fa_sending
 import my_info
 
 
@@ -21,12 +25,21 @@ def login(request):
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
+            user = auth.authenticate(username=username, password=password)  # Проверка совпадений с БД
 
             session_key = request.session.session_key
 
-            if user:
-                auth.login(request, user)
+            # if user.has_two_factor:
+            #     user.is_verified = True
+            #     user.save()
+            #     return redirect(f'/user/confirmation/{user.username}')
+
+            if user is not None:
+                if user.has_two_factor:
+                    two_fa_sending(request, user=user, path='users/confirmation.html')
+                    request.session['username'] = user.username
+                    return redirect('users:confirmation')
+                auth.login(request, user)  # Логин пользователя
                 messages.success(request, f"{username}, Вы успешно вошли в аккаунт")
 
                 if session_key:
@@ -44,6 +57,7 @@ def login(request):
     contex = {
         'title': 'Home - Авторизация',
         'form': form,
+        'is_authenticated': request.user.is_authenticated,
     }
     return render(request, 'users/login.html', contex)
 
@@ -77,46 +91,35 @@ def registration(request):
     return render(request, 'users/registration.html', contex)
 
 
-def two_fa(request):
-    return render(request, 'users/two-fa.html')
-
-
 def confirmation(request):
     if request.method == 'POST':
-        if request.POST:
-            email = request.POST['email']
-            code = str(uuid4())
-            code = code[:code.find('-')]
-            send_mail(
-                subject='Your code verification from online shop.',
-                message=f"""Hello Blink Customer
-    Please enter this verification code in site now to confirm your email address and complete the setup process:
-    Your verification PIN:
-    <h1>{code}</h1>
-    This code expires 40 minutes from when it was sent. If the code is not entered, access to your account from the device will not be granted.
-    If you'd like more information or assistance please view our FAQ or contact Customer Service.
-    Thanks,
-    The Blink Team""",
-                from_email=my_info.EMAIL_HOST_USER,
-                recipient_list=[email],
-                fail_silently=False,
-            )
-            print(f"[INFO] message to email was sent to {email}")
+        user = User.objects.filter(username=request.session.get('username', None))[0]
+        msg = f"{user.username}, Вы успешно вошли в аккаунт"
+        if request.session.get('has_two_factor', False):
+            msg = f"{user.username}, Вы успешно подключили двухфакторную аутентификацию!"
+            user.has_two_factor = True
+            user.save()
+        otp_secret_key = request.session.get('otp_secret_key', None)
+        otp_valid_time = request.session.get('otp_valid_time', None)
+        otp = request.POST.get('code', None)
+        if otp_valid_time and otp is not None:
+            valid_until = datetime.fromisoformat(otp_valid_time)
 
-
-            return render(request, 'users/confirmation.html')
-        else:
-            return render(request, 'users/profile.html')
+            if valid_until > datetime.now():
+                topt = pyotp.TOTP(otp_secret_key, interval=600)
+                if topt.verify(otp):
+                    auth.login(request, user)  # Логин пользователя
+                    del request.session['otp_valid_time']
+                    del request.session['otp_secret_key']
+                    del request.session['username']
+                    messages.success(request, msg)
+                    return redirect('main:index')
     else:
-        print('1111111111111')
-        return HttpResponseRedirect(reverse('users:profile'))
-
-
-
-
-
-
-
+        if request.user.is_authenticated:
+            two_fa_sending(request, user=request.user, path='users/confirmation.html')
+            request.session['username'] = request.user.username
+            request.session['has_two_factor'] = True
+        return render(request, 'users/confirmation.html')
 
 
 def forgot_password(request):
@@ -127,14 +130,25 @@ def forgot_password(request):
 def profile(request):
     # Создание формы, регистрация
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Данные успешно обновлены")
+        code = request.POST.get('code', None)
+        if code is not None:
+            email = request.user.email
+            user = User.objects.filter(email=email)[0]
+            if user.verification_code == code:
+                user.has_two_factor = True
+                user.save()
+                return render(request, 'users/profile.html')
+        else:
+            form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Данные успешно обновлены")
 
-            # Перенаправление на страницу пользователя
-            return HttpResponseRedirect(reverse('user:profile'))
+                # Перенаправление на страницу пользователя
+                return HttpResponseRedirect(reverse('user:profile'))
     else:
+        user = request.user
+
         form = ProfileForm(instance=request.user)
 
     orders = (
@@ -146,13 +160,13 @@ def profile(request):
         ).order_by("-id")
     )
 
-    contex = {
+    context = {
         'title': 'Home - Кабинет',
         'form': form,
         'orders': orders,
-        'two_factor_required': True,
+        'two_factor_required': not User.objects.get(email=request.user.email).has_two_factor,
     }
-    return render(request, 'users/profile.html', contex)
+    return render(request, 'users/profile.html', context)
 
 
 def users_cart(request):
@@ -166,3 +180,7 @@ def logout(request):
         messages.success(request, f"{name}, Вы успешно вышли из аккаунта")
         auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
+
+
+def error(request):
+    return render(request, 'users/error.html')
