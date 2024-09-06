@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordResetForm
 
 from users.models import User
 
@@ -55,4 +55,16 @@ class CodeForm(forms.Form):
         model = User
         fields = (
             'code'
+        )
+
+
+class ForgotPasswordForm(PasswordResetForm):
+    password1 = forms.CharField()
+    password2 = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = (
+            "password1",
+            "password2",
         )

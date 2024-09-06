@@ -12,5 +12,5 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('forgot-pass/', views.forgot_password, name='forgot-pass'),
     path('confirmation/', views.confirmation, name='confirmation'),
-    path('2fa-error/', views.error, name='fa_error'),
+    path('recoovery/', views.password_recovery, name='recovery'),
 ]

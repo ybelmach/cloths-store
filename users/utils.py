@@ -27,5 +27,5 @@ The Shop Team""",
         recipient_list=[email],
         fail_silently=False,
     )
-    print(f"[INFO] message to email was sent to {email}")
+    print(f"[INFO] message to email was sent to {email}; OTP - {otp}")
     return render(request, path)

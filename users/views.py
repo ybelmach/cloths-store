@@ -7,7 +7,9 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from uuid import uuid4
 from datetime import datetime
+from django.contrib.auth.hashers import make_password
 import pyotp
+import hashlib
 
 from carts.models import Cart
 from orders.models import Order, OrderItem
@@ -29,13 +31,8 @@ def login(request):
 
             session_key = request.session.session_key
 
-            # if user.has_two_factor:
-            #     user.is_verified = True
-            #     user.save()
-            #     return redirect(f'/user/confirmation/{user.username}')
-
             if user is not None:
-                if user.has_two_factor:
+                if user.has_two_factor and not request.session.get('need_password', False):
                     two_fa_sending(request, user=user, path='users/confirmation.html')
                     request.session['username'] = user.username
                     return redirect('users:confirmation')
@@ -44,6 +41,9 @@ def login(request):
 
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
+
+                if request.session.get('need_password', False) is not False:
+                    del request.session['need_password']
 
                 redirect_page = request.GET.get('next', None)
                 if redirect_page and redirect_page != reverse('user:logout'):
@@ -93,7 +93,8 @@ def registration(request):
 
 def confirmation(request):
     if request.method == 'POST':
-        user = User.objects.filter(username=request.session.get('username', None))[0]
+        username = request.session.get('username', None)
+        user = User.objects.filter(username=username)[0]
         msg = f"{user.username}, Вы успешно вошли в аккаунт"
         if request.session.get('has_two_factor', False):
             msg = f"{user.username}, Вы успешно подключили двухфакторную аутентификацию!"
@@ -104,16 +105,26 @@ def confirmation(request):
         otp = request.POST.get('code', None)
         if otp_valid_time and otp is not None:
             valid_until = datetime.fromisoformat(otp_valid_time)
-
             if valid_until > datetime.now():
                 topt = pyotp.TOTP(otp_secret_key, interval=600)
                 if topt.verify(otp):
-                    auth.login(request, user)  # Логин пользователя
                     del request.session['otp_valid_time']
                     del request.session['otp_secret_key']
-                    del request.session['username']
-                    messages.success(request, msg)
-                    return redirect('main:index')
+                    if request.session.get('need_password', False) is not False:
+                        return render(request, 'users/password_recovery.html')
+                    else:
+                        del request.session['username']
+                        auth.login(request, user)
+                        messages.success(request, msg)
+                        return redirect('main:index')
+                else:
+                    messages.error(request, 'Пароли не совпадают')
+                    print('Пароли не совпадают')
+                    return redirect('users:confirmation')
+            else:
+                messages.error(request, 'Время одноразового пароля истекло')
+                print('Время одноразового пароля истекло')
+                return redirect('main:index')
     else:
         if request.user.is_authenticated:
             two_fa_sending(request, user=request.user, path='users/confirmation.html')
@@ -123,7 +134,30 @@ def confirmation(request):
 
 
 def forgot_password(request):
-    return render(request, 'users/forgot_pass.html')
+    if request.method == 'POST':
+        user = User.objects.filter(email=request.POST['email'])[0]
+        two_fa_sending(request, user=user, path='users/confirmation.html')
+        request.session['username'] = user.username
+        request.session['need_password'] = True
+        return redirect('users:confirmation')
+    else:
+        return render(request, 'users/forgot_pass.html')
+
+
+def password_recovery(request):
+    if request.method == 'POST':
+        if request.session.get('need_password', False) is not False:
+            username = request.session.get('username', None)
+            user = User.objects.filter(username=username)[0]
+            new_pass = request.POST['password1']
+            user.password = make_password(new_pass)
+            user.save()
+            print(user.password)
+            del request.session['username']
+            del request.session['need_password']
+            return redirect('user:login')
+    else:
+        return render(request, 'users/password_recovery.html')
 
 
 @login_required
@@ -143,8 +177,6 @@ def profile(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Данные успешно обновлены")
-
-                # Перенаправление на страницу пользователя
                 return HttpResponseRedirect(reverse('user:profile'))
     else:
         user = request.user
@@ -180,7 +212,3 @@ def logout(request):
         messages.success(request, f"{name}, Вы успешно вышли из аккаунта")
         auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
-
-
-def error(request):
-    return render(request, 'users/error.html')
